@@ -1,0 +1,56 @@
+<?php
+session_start();
+?>
+<?php
+$servername = "db.luddy.indiana.edu";
+$username = "i494f22_team09";
+$password = "my+sql=i494f22_team09";
+$db = "i494f22_team09";
+
+$conn = new mysqli($servername, $username, $password, $db);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "SELECT f.firstname as first-name, l.lastname as last-name, m.major as major FROM group AS g INNER JOIN course AS c ON g.courseid = c.id";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo '<li class="rvt-cols-6-md [ rvt-flex rvt-m-bottom-xxl ]">
+        <div class="rvt-card">
+            <div class="rvt-avatar rvt-avatar--lg">
+                <img class="rvt-avatar__image" src="https://rivet.iu.edu/img/placeholder/avatar-1.jpg" alt="">
+            </div>
+            <div class="rvt-card__body">
+                <div class="rvt-card__eyebrow"></div>
+                <h2 class="rvt-card__title">
+                    <a href="#0">Norval Ashton</a>
+                </h2>
+                <div class="rvt-card__content [ rvt-flow ]">
+                    <p>Legacy Integration Technician</p>
+                </div>
+                <div class="rvt-card__meta">
+                    <div class="rvt-flex rvt-items-center">
+                        
+                      
+                    </div>
+                    <div class="rvt-flex rvt-items-center rvt-m-top-xs">
+                        <svg class="rvt-color-black-400 rvt-m-right-xs" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="currentColor" d="M13.5,3H2.5A1.5,1.5,0,0,0,1,4.5v8A1.5,1.5,0,0,0,2.5,14h11A1.5,1.5,0,0,0,15,12.5v-8A1.5,1.5,0,0,0,13.5,3ZM11.41,5,8,7.77,4.59,5ZM3,12V6.29L7.11,9.62l.12.08a1.5,1.5,0,0,0,1.54,0L13,6.29V12Z" />
+                        </svg>
+                        <a href="#0">Braeden.McLaughlin@hotmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+';
+    }
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+?>
